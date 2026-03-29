@@ -1,0 +1,2 @@
+include ':instacam', ':sample'
+rootProject.name = "InstaCamHelper"
