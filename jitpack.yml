@@ -1,5 +1,4 @@
 jdk:
   - openjdk11
 install:
-  - ./gradlew :instacam:assembleRelease
   - ./gradlew :instacam:publishToMavenLocal
