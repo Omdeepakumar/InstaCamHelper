@@ -15,7 +15,8 @@ allprojects {
     }
 }
 
-apply plugin: 'maven-publish'
+// Dummy assemble task for root project to satisfy JitPack
+task assemble {}
 
 task clean(type: Delete) {
     delete rootProject.buildDir
