@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
                 final String path = getExternalFilesDir(null) + "/photo_" + System.currentTimeMillis() + ".jpg";
                 cameraView.capturePhoto(path, new CameraEngine.CaptureCallback() {
                     @Override
-                    public void onCaptureSuccess(String path) {
-                        GalleryHelper.saveToGallery(MainActivity.this, path, false);
+                    public void onCaptureSuccess(final String path) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                GalleryHelper.saveToGallery(MainActivity.this, path, false);
                                 Toast.makeText(MainActivity.this, "Photo saved to gallery!", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -106,6 +106,24 @@ public class MainActivity extends AppCompatActivity {
     private boolean allPermissionsGranted() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cameraView.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cameraView.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cameraView.onDestroy();
     }
 
     @Override

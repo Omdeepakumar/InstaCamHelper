@@ -77,11 +77,11 @@ public class InstaCamView extends GLSurfaceView implements GLSurfaceView.Rendere
     }
 
     public void startRecording(String path) {
-        cameraEngine.startRecording(path);
+        cameraEngine.startRecording(path, surfaceTexture);
     }
 
     public void stopRecording() {
-        cameraEngine.stopRecording();
+        cameraEngine.stopRecording(surfaceTexture);
     }
 
     public void toggleFlash(boolean on) {
@@ -90,5 +90,21 @@ public class InstaCamView extends GLSurfaceView implements GLSurfaceView.Rendere
 
     public void switchCamera() {
         cameraEngine.switchCamera(surfaceTexture);
+    }
+
+    public void onPause() {
+        super.onPause();
+        cameraEngine.closeCamera();
+    }
+
+    public void onResume() {
+        super.onResume();
+        if (surfaceTexture != null) {
+            cameraEngine.openCamera(surfaceTexture);
+        }
+    }
+
+    public void onDestroy() {
+        cameraEngine.stopBackgroundThread();
     }
 }
