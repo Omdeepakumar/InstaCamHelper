@@ -15,11 +15,6 @@ allprojects {
     }
 }
 
-// Ensure root project has assemble and publish tasks for JitPack
-task assemble {}
-task publishToMavenLocal {}
-task install(dependsOn: 'publishToMavenLocal') {}
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
